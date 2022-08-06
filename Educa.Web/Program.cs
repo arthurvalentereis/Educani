@@ -1,8 +1,21 @@
+using AutoMapper;
+using Educa.DependencyInjection;
+using Educa.Infrastructure.AutoMapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+DependencyRegistration.RegistrarDependencias(builder.Services, builder.Configuration);
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

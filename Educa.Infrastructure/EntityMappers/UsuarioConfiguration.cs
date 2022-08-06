@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Educa.Infrastructure.EntityMappers
 {
-    internal class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
+    public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
@@ -19,8 +19,9 @@ namespace Educa.Infrastructure.EntityMappers
             builder.HasOne(x => x.HistoricoEscolar).WithOne(x => x.Usuario);
             builder.HasOne(x => x.Escolaridade).WithOne(x => x.Usuario);
             builder.Property(x => x.Nome).HasColumnName("nome").HasColumnType("varchar(50)");
-            builder.Property(x => x.Sobrenome).HasColumnName("username").HasColumnType("varchar(50)");
-            builder.Property(x => x.DataNascimento).HasColumnName("password_hash").HasColumnType("varchar(200)");
+            builder.Property(x => x.Sobrenome).HasColumnName("sobrenome").HasColumnType("varchar(50)");
+            builder.Property(x => x.DataNascimento).HasColumnName("data_nascimento");
+            builder.Property(x => x.Email).HasColumnName("email").HasColumnType("varchar(150)");
             builder.Property(x => x.EscolaridadeId).HasColumnName("id_escolaridade");
             builder.Property(x => x.HistoricoEscolarId).HasColumnName("id_historico_escolar");
 

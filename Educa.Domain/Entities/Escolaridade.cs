@@ -11,5 +11,7 @@ namespace Educa.Domain.Entities
     {
         public string Descricao { get; set; }
         public Usuario Usuario { get; set; }
+
+        public Escolaridade() { }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Educa.Infrastructure.EntityMappers
 {
-    internal class HistoricoEscolarConfiguration : IEntityTypeConfiguration<HistoricoEscolar>
+    public class HistoricoEscolarConfiguration : IEntityTypeConfiguration<HistoricoEscolar>
     {
         public void Configure(EntityTypeBuilder<HistoricoEscolar> builder)
         {

@@ -1,4 +1,6 @@
 ﻿using Educa.Domain.Entities;
+using Educa.Infrastructure.EntityMappers;
+using Educa.Infrastructure.EntityMappers.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,10 @@ namespace Educa.Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new EscolaridadeConfiguration());
+            builder.ApplyConfiguration(new UsuarioConfiguration());
+            builder.ApplyConfiguration(new HistoricoEscolarConfiguration());
+            builder.PopularEscolaridade();
             base.OnModelCreating(builder);
         }
     }

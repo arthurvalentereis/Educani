@@ -12,5 +12,7 @@ namespace Educa.Domain.Entities
         public string Formato { get; set; }
         public string Nome { get; set; }
         public Usuario Usuario { get; set; }
+
+        public HistoricoEscolar() { }
     }
 }
