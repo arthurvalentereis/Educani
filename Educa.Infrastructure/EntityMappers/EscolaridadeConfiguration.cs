@@ -16,7 +16,7 @@ namespace Educa.Infrastructure.EntityMappers
             builder.ToTable("tb_escolaridade");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("id_escolaridade");
-            builder.HasOne(x => x.Usuario).WithOne(x => x.Escolaridade);
+            builder.HasMany(x => x.Usuario).WithOne(x => x.Escolaridade);
             builder.Property(x => x.Descricao).HasColumnName("descricao").HasColumnType("varchar(50)");
 
             builder.Property(x => x.CriadoEm).HasColumnName("criado_em");

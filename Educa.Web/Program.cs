@@ -1,12 +1,16 @@
 using AutoMapper;
 using Educa.DependencyInjection;
 using Educa.Infrastructure.AutoMapper;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+  options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 DependencyRegistration.RegistrarDependencias(builder.Services, builder.Configuration);
 
 var mapperConfig = new MapperConfiguration(mc =>
@@ -16,6 +20,8 @@ var mapperConfig = new MapperConfiguration(mc =>
 
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+
 
 var app = builder.Build();
 
@@ -41,5 +47,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html"); ;
+
 
 app.Run();

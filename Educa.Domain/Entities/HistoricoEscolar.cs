@@ -11,8 +11,14 @@ namespace Educa.Domain.Entities
     {
         public string Formato { get; set; }
         public string Nome { get; set; }
-        public Usuario Usuario { get; set; }
+        public string CaminhoArquivo { get; set; }
+        public List<Usuario>? Usuario { get; set; }
 
-        public HistoricoEscolar() { }
+        public HistoricoEscolar(string Formato, string Nome, string CaminhoArquivo) 
+        {
+            this.Formato = Formato;
+            this.Nome = Nome;
+            this.CaminhoArquivo = CaminhoArquivo;
+        }
     }
 }

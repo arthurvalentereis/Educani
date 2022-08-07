@@ -21,6 +21,7 @@ namespace Educa.DependencyInjection
     {
         public static void RegistrarDependencias(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddSingleton(configuration);
             RegistrarDados(services, configuration);
             RegistrarRepositorios(services);
@@ -37,11 +38,13 @@ namespace Educa.DependencyInjection
             //services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
             //services.AddScoped(typeof(UsuarioRepository), typeof(BaseRepository<Usuario, int>));
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IHistoricoEscolarRepository, HistoricoEscolarRepository>();
         }
 
         private static void RegistrarServicos(IServiceCollection services)
         {
             services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IHistoricoEscolarService, HistoricoEscolarService>();
         }
 
 

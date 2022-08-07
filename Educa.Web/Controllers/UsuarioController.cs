@@ -12,24 +12,33 @@ namespace Educa.Web.Controllers
     public class UsuarioController : BaseController
     {
         private IUsuarioService _usuarioService { get; }
+        private IHistoricoEscolarService _historicoEscolar { get; }
         private readonly IMapper _mapper;
 
         public UsuarioController(
             IUsuarioService usuarioService,
+            IHistoricoEscolarService historicoEscolar,
             IMapper mapper
             )
         {
             _usuarioService = usuarioService;
+            _historicoEscolar = historicoEscolar;
             _mapper = mapper;
         }
         [HttpPost("create")]
-        public IActionResult Create(NovoUsuarioRequest model)
+        public IActionResult Create([FromForm] NovoUsuarioRequest model)
         {
             try
             {
-                Usuario usuario = _mapper.Map<NovoUsuarioRequest, Usuario>(model);
-                var user = _usuarioService.Create(usuario, IpAddress());
-                return Ok(user);
+                Usuario novoUsuario = _mapper.Map<NovoUsuarioRequest, Usuario>(model);
+
+                if (model.HistoricoEscolar != null)
+                {
+                    var historicoEscolar = _historicoEscolar.Create(model.HistoricoEscolar, IpAddress());
+                    novoUsuario.HistoricoEscolarId = historicoEscolar.Id;
+                }
+                var usuario = _usuarioService.Create(novoUsuario, IpAddress());
+                return Ok(usuario);
             }
             catch
             {
@@ -45,7 +54,7 @@ namespace Educa.Web.Controllers
                 var response = _usuarioService.Update(usuario);
                 return Ok(response);
             }
-            catch 
+            catch
             {
                 throw;
             }
@@ -73,7 +82,7 @@ namespace Educa.Web.Controllers
             {
                 return Ok(_usuarioService.GetById(id));
             }
-            catch 
+            catch
             {
                 throw;
             }
@@ -86,10 +95,29 @@ namespace Educa.Web.Controllers
                 var user = _usuarioService.List();
                 return Ok(user);
             }
-            catch 
+            catch
             {
                 throw;
             }
         }
+
+        [HttpGet("DownloadHistoricoEscolar/{id:int}")]
+        public ActionResult DownloadHistoricoEscolar([FromRoute] int id)
+        {
+            try
+            {
+                var historicoEscolar =  _historicoEscolar.GetById(id);
+                if (!System.IO.File.Exists(historicoEscolar.CaminhoArquivo))
+                {
+                    throw new ArgumentException("Arquivo não existe!");
+                }
+                return File(System.IO.File.ReadAllBytes(historicoEscolar.CaminhoArquivo), $"application/{historicoEscolar.Formato.Replace(".","")}");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

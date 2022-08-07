@@ -19,6 +19,7 @@
               <tr>
                 <th style="width: 20%">Nome</th>
                 <th style="width: 20%">Sobrenome</th>
+                <th style="width: 20%">Nascimento</th>
                 <th style="width: 20%">E-mail</th>
                 <th style="width: 10%">Escolaridade</th>
                 <th style="width: 10%">Historico Escolar</th>
@@ -29,9 +30,17 @@
               <tr *ngFor="let user of usuarios">
                 <td>{{user.nome}}</td>
                 <td>{{user.sobrenome}}</td>
+                <td>{{user.dataNascimento}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.escolaridadeId}}</td>
-                <td>{{user.historicoEscolarId}}</td>
+                <td>{{obterNomeEscolaridade(user.escolaridadeId)}}</td>
+                <td>
+                  <button mat-raised-button  (click)="baixarHistorico(user.historicoEscolarId)">
+                    Download
+                    <mat-icon>cloud_download</mat-icon>
+                  </button>
+
+
+                </td>
                 <td style="white-space: nowrap">
                   <button type="reset" mat-raised-button color="primary" matTooltip="Editar"
                     routerLink="editar-usuario/{{user.id}}" class="btn btn-sm btn-primary mr-1">

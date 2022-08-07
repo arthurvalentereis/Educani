@@ -10,7 +10,7 @@ namespace Educa.Domain.Entities
     public class Escolaridade : EntidadeBase
     {
         public string Descricao { get; set; }
-        public Usuario Usuario { get; set; }
+        public List<Usuario> Usuario { get; set; }
 
         public Escolaridade() { }
     }

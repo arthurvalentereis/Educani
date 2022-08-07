@@ -32,7 +32,8 @@ namespace Educa.Infrastructure.Migrations
                     id_historico_escolar = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     formato = table.Column<string>(type: "varchar(50)", nullable: false),
-                    nome = table.Column<string>(type: "varchar(50)", nullable: false),
+                    nome = table.Column<string>(type: "varchar(150)", nullable: false),
+                    caminho_arquivo = table.Column<string>(type: "varchar(250)", nullable: false),
                     criado_em = table.Column<DateTime>(type: "datetime2", nullable: false),
                     atualizado_em = table.Column<DateTime>(type: "datetime2", nullable: false),
                     status = table.Column<bool>(type: "bit", nullable: true)
@@ -80,23 +81,21 @@ namespace Educa.Infrastructure.Migrations
                 columns: new[] { "id_escolaridade", "atualizado_em", "criado_em", "descricao", "status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9459), new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9449), "Infantil", true },
-                    { 2, new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9461), new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9461), "Fundamental", true },
-                    { 3, new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9463), new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9462), "Médio", true },
-                    { 4, new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9464), new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9463), "Superior", true }
+                    { 1, new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6943), new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6934), "Infantil", true },
+                    { 2, new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6945), new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6945), "Fundamental", true },
+                    { 3, new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6947), new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6946), "Médio", true },
+                    { 4, new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6948), new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6947), "Superior", true }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_usuarios_id_escolaridade",
                 table: "tb_usuarios",
-                column: "id_escolaridade",
-                unique: true);
+                column: "id_escolaridade");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_usuarios_id_historico_escolar",
                 table: "tb_usuarios",
-                column: "id_historico_escolar",
-                unique: true);
+                column: "id_historico_escolar");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

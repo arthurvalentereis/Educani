@@ -16,9 +16,11 @@ namespace Educa.Infrastructure.EntityMappers
             builder.ToTable("tb_historico_escolar");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).HasColumnName("id_historico_escolar");
-            builder.HasOne(x => x.Usuario).WithOne(x => x.HistoricoEscolar);
+            builder.HasMany(x => x.Usuario).WithOne(x => x.HistoricoEscolar);
+
             builder.Property(x => x.Formato).HasColumnName("formato").HasColumnType("varchar(50)");
-            builder.Property(x => x.Nome).HasColumnName("nome").HasColumnType("varchar(50)");
+            builder.Property(x => x.Nome).HasColumnName("nome").HasColumnType("varchar(150)");
+            builder.Property(x => x.CaminhoArquivo).HasColumnName("caminho_arquivo").HasColumnType("varchar(250)");
 
             builder.Property(x => x.CriadoEm).HasColumnName("criado_em");
             builder.Property(x => x.AtualizadoEm).HasColumnName("atualizado_em");

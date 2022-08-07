@@ -1,4 +1,6 @@
-﻿namespace Educa.Domain.Dto.Usuario.Request
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Educa.Domain.Dto.Usuario.Request
 {
     public class NovoUsuarioRequest
     {
@@ -7,6 +9,6 @@
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
         public int EscolaridadeId { get; set; }
-        public int HistoricoEscolarId { get; set; }
+        public IFormFile HistoricoEscolar { get; set; }
     }
 }

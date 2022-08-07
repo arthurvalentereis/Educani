@@ -30,7 +30,7 @@
               </div>
             </div>
 
-            <div class="form-group col-7">
+            <div class="form-group col-5">
               <label>Email</label>
               <input type="text" formControlName="email" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
@@ -42,7 +42,7 @@
 
             <div class="form-group col-5">
               <label>Data nascimento</label>
-              <input type="text" formControlName="dataNascimento" class="form-control"
+              <input type="date" formControlName="dataNascimento" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['dataNascimento'].errors }" />
               <div *ngIf="submitted && f['dataNascimento'].errors" class="invalid-feedback">
                 <div *ngIf="f['dataNascimento'].errors['required']">Sobrenome é obrigatório</div>
@@ -50,11 +50,11 @@
             </div>
 
 
-            <div class="form-group col-2">
+            <div class="form-group col-5">
               <label>Escolaridade</label>
               <select formControlName="escolaridadeId" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['escolaridadeId'].errors }">
-                <option value=""></option>
+                <option disabled value="">Escolha uma opção</option>
                 <option value="1">Infantil</option>
                 <option value="2">Fundamental</option>
                 <option value="3">Médio</option>
@@ -64,13 +64,17 @@
                 <div *ngIf="f['escolaridadeId'].errors['required']">Escolaridade é obrigatória.</div>
               </div>
             </div>
-            <div class="form-group col">
+            <div class="form-group col-5">
               <label>Historico Escolar</label>
-              <input type="historicoEscolarId" formControlName="historicoEscolarId" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['historicoEscolarId'].errors }" />
-              <div *ngIf="submitted && f['historicoEscolarId'].errors" class="invalid-feedback">
-                <div *ngIf="f['historicoEscolarId'].errors['required']">Histórico escolar é obrigatório</div>
-              </div>
+              <br />
+              <input type="file"
+                     name="historicoEscolar"
+                     id="historicoEscolar"
+                     (change)="onFileAntigoChange($event)">
+              <label for="historicoEscolar">
+                <span>Selecione o histórico escolar</span>
+              </label>
+
             </div>
 
           </div>
@@ -83,6 +87,7 @@
                 <div *ngIf="f['id'].errors['required']">Id é obrigatório</div>
               </div>
             </div>
+
             <div class="form-group col-5">
               <label>Nome</label>
               <input type="text" formControlName="nome" class="form-control"
@@ -91,6 +96,16 @@
                 <div *ngIf="f['nome'].errors['required']">Nome é obrigatório</div>
               </div>
             </div>
+
+            <div class="form-group col-5">
+              <label>Sobrenome</label>
+              <input type="text" formControlName="sobrenome" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['sobrenome'].errors }" />
+              <div *ngIf="submitted && f['sobrenome'].errors" class="invalid-feedback">
+                <div *ngIf="f['sobrenome'].errors['required']">First Name is required</div>
+              </div>
+            </div>
+
             <div class="form-group col-5">
               <label>Email</label>
               <input type="text" formControlName="email" class="form-control"
@@ -100,32 +115,28 @@
                 <div *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
               </div>
             </div>
+
             <div class="form-group col-5">
-              <label>First Name</label>
-              <input type="text" formControlName="firstName" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
-              <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+              <label>Data de nascimento</label>
+              <input type="date" formControlName="dataNascimento" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['dataNascimento'].errors }" />
+              <div *ngIf="submitted && f['dataNascimento'].errors" class="invalid-feedback">
+                <div *ngIf="f['dataNascimento'].errors['required']">Last Name is required</div>
               </div>
             </div>
-            <div class="form-group col-5">
-              <label>Last Name</label>
-              <input type="text" formControlName="lastName" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
-              <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
-                <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
-              </div>
-            </div>
+
             <div class="form-group col-2">
-              <label>Role</label>
-              <select formControlName="role" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
-                <option value=""></option>
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
+              <label>Escolaridade</label>
+              <select formControlName="escolaridadeId" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['escolaridadeId'].errors }">
+                <option disabled value="">Escolha uma opção</option>
+                <option value="1">Infantil</option>
+                <option value="2">Fundamental</option>
+                <option value="3">Médio</option>
+                <option value="4">Superior</option>
               </select>
-              <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
-                <div *ngIf="f['role'].errors['required']">Role is required</div>
+              <div *ngIf="submitted && f['escolaridadeId'].errors" class="invalid-feedback">
+                <div *ngIf="f['escolaridadeId'].errors['required']">Escolaridade is required</div>
               </div>
             </div>
           </div>

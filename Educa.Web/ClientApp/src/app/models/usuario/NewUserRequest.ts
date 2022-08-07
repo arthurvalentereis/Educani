@@ -5,6 +5,6 @@ export class NewUserRequest {
         public email: string,
         public dataNascimento: string,
         public escolaridadeId: string,
-        public historicoEscolarId: string,
+        public historicoEscolar: File,
     ) { }
 }

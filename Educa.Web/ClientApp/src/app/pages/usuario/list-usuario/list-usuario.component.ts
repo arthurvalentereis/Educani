@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Escolaridade } from 'src/app/models/enum/enum.escolaridade';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -12,6 +15,7 @@ export class UsuarioComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
@@ -30,5 +34,30 @@ export class UsuarioComponent implements OnInit {
       .subscribe(() => {
         this.usuarios = this.usuarios.filter((x: { id: string; }) => x.id !== id);
       });
+  }
+
+  obterNomeEscolaridade(id: number) {
+    return Escolaridade.get(id);
+  }
+
+  baixarHistorico(id: number) {
+    this.usuarioService.downloadHistoricoEscolar(id).subscribe({
+      next: (result) => {
+        this.download(result);
+      },
+      error: (e: HttpErrorResponse) => {
+        console.log(e);
+      },
+    });
+  }
+
+  download(data: any) {
+    const a = document.createElement('a');
+    const urlArquivo = URL.createObjectURL(data);
+    console.log(data);
+    this.sanitizer.sanitize(SecurityContext.URL, urlArquivo);
+    a.setAttribute('href', urlArquivo);
+    a.setAttribute('download', 'file');
+    a.click();
   }
 }

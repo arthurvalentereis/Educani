@@ -56,32 +56,32 @@ namespace Educa.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            AtualizadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9459),
-                            CriadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9449),
+                            AtualizadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6943),
+                            CriadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6934),
                             Descricao = "Infantil",
                             Status = true
                         },
                         new
                         {
                             Id = 2,
-                            AtualizadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9461),
-                            CriadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9461),
+                            AtualizadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6945),
+                            CriadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6945),
                             Descricao = "Fundamental",
                             Status = true
                         },
                         new
                         {
                             Id = 3,
-                            AtualizadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9463),
-                            CriadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9462),
+                            AtualizadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6947),
+                            CriadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6946),
                             Descricao = "Médio",
                             Status = true
                         },
                         new
                         {
                             Id = 4,
-                            AtualizadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9464),
-                            CriadoEm = new DateTime(2022, 8, 6, 16, 25, 51, 554, DateTimeKind.Local).AddTicks(9463),
+                            AtualizadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6948),
+                            CriadoEm = new DateTime(2022, 8, 7, 17, 15, 40, 519, DateTimeKind.Local).AddTicks(6947),
                             Descricao = "Superior",
                             Status = true
                         });
@@ -100,6 +100,11 @@ namespace Educa.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("atualizado_em");
 
+                    b.Property<string>("CaminhoArquivo")
+                        .IsRequired()
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("caminho_arquivo");
+
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2")
                         .HasColumnName("criado_em");
@@ -111,7 +116,7 @@ namespace Educa.Infrastructure.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("varchar(150)")
                         .HasColumnName("nome");
 
                     b.Property<bool?>("Status")
@@ -176,11 +181,9 @@ namespace Educa.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EscolaridadeId")
-                        .IsUnique();
+                    b.HasIndex("EscolaridadeId");
 
-                    b.HasIndex("HistoricoEscolarId")
-                        .IsUnique();
+                    b.HasIndex("HistoricoEscolarId");
 
                     b.ToTable("tb_usuarios", (string)null);
                 });
@@ -188,14 +191,14 @@ namespace Educa.Infrastructure.Migrations
             modelBuilder.Entity("Educa.Domain.Entities.Usuario", b =>
                 {
                     b.HasOne("Educa.Domain.Entities.Escolaridade", "Escolaridade")
-                        .WithOne("Usuario")
-                        .HasForeignKey("Educa.Domain.Entities.Usuario", "EscolaridadeId")
+                        .WithMany("Usuario")
+                        .HasForeignKey("EscolaridadeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Educa.Domain.Entities.HistoricoEscolar", "HistoricoEscolar")
-                        .WithOne("Usuario")
-                        .HasForeignKey("Educa.Domain.Entities.Usuario", "HistoricoEscolarId")
+                        .WithMany("Usuario")
+                        .HasForeignKey("HistoricoEscolarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -206,14 +209,12 @@ namespace Educa.Infrastructure.Migrations
 
             modelBuilder.Entity("Educa.Domain.Entities.Escolaridade", b =>
                 {
-                    b.Navigation("Usuario")
-                        .IsRequired();
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Educa.Domain.Entities.HistoricoEscolar", b =>
                 {
-                    b.Navigation("Usuario")
-                        .IsRequired();
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }
