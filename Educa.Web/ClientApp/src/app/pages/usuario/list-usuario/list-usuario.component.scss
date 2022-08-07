@@ -1,0 +1,25 @@
+a {
+  cursor: pointer;
+  width: auto;
+}
+
+.app-container {
+    min-height: 320px;
+    overflow: hidden;
+    width: auto;
+}
+
+.btn-delete-user {
+    text-align: center;
+    box-sizing: content-box;
+    width: auto;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  width: auto;
+}
+
+label{
+  color: black !important;
+}

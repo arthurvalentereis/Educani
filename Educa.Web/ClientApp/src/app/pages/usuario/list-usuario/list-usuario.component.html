@@ -1,0 +1,60 @@
+<div class="p-4">
+  <div class="container">
+    <div class="internal-container" style="text-align: -webkit-center;">
+      <mat-card class="mat-elevation-z8">
+        <mat-toolbar
+          style="box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12); justify-content: center;">
+          <div align="center" style="text-align: right;">
+            <h1>Cadastro de Usuários</h1>
+          </div>
+        </mat-toolbar>
+        <br><br>
+        <mat-card-content>
+          <button mat-raised-button matTooltip="Adicionar" color="primary" routerLink="adicionar-usuario"
+            class="btn btn-sm btn-success mb-2">
+            <mat-icon>add</mat-icon>Adicionar novo usuário
+          </button>
+          <table class="table-striped" style="width: 100%;">
+            <thead>
+              <tr>
+                <th style="width: 20%">Nome</th>
+                <th style="width: 20%">Sobrenome</th>
+                <th style="width: 20%">E-mail</th>
+                <th style="width: 10%">Escolaridade</th>
+                <th style="width: 10%">Historico Escolar</th>
+                <th style="width: 10%">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of usuarios">
+                <td>{{user.nome}}</td>
+                <td>{{user.sobrenome}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.escolaridadeId}}</td>
+                <td>{{user.historicoEscolarId}}</td>
+                <td style="white-space: nowrap">
+                  <button type="reset" mat-raised-button color="primary" matTooltip="Editar"
+                    routerLink="editar-usuario/{{user.id}}" class="btn btn-sm btn-primary mr-1">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button type="delete" mat-raised-button color="warn" matTooltip="Excluir"
+                    (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
+                    [disabled]="user.isDeleting">
+                    <mat-icon>delete</mat-icon>
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting"></span>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="!usuarios">
+                <td colspan="4" class="text-center">
+                  <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -22,6 +22,7 @@ namespace Educa.Web.Controllers
             _usuarioService = usuarioService;
             _mapper = mapper;
         }
+        [HttpPost("create")]
         public IActionResult Create(NovoUsuarioRequest model)
         {
             try

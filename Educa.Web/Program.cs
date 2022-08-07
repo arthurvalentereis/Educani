@@ -26,7 +26,15 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors(builder =>
+             builder.AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader()
+             .AllowCredentials()
+             .WithOrigins(
+                 "http://localhost:44426"
+              )
+             .SetPreflightMaxAge(TimeSpan.FromDays(7)));
 
 app.MapControllerRoute(
     name: "default",
