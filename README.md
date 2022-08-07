@@ -1,4 +1,9 @@
-# Educani
+<div align="center">
+<img src="Educa.Web/ClientApp/src/assets/icons/favicon.ico" alt="drawing" width="200"/>
+
+# Educani 
+
+</div>
 
 ## Objetivo
 Projeto destinado apenas para avaliação de empresa.
